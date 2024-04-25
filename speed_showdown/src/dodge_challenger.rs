@@ -1,4 +1,5 @@
 use crate::assets_loader::SceneAssets;
+use crate::collision_detection::Collider;
 use crate::movement::{Acceleration, MovingObjectBundle, Velocity};
 use crate::schedule::InGameSet;
 use bevy::prelude::*;
@@ -9,6 +10,7 @@ const STARTING_TRANSLATION: Vec3 = Vec3 {
     y: 0.0,
     z: 20.0,
 };
+const DODGE_CHALLENDER_RADIUS: f32 = 10.0;
 
 pub struct DodgeChallengerPlugin;
 
@@ -24,8 +26,8 @@ impl Plugin for DodgeChallengerPlugin {
     }
 }
 
-#[derive(Debug, Component)]
-struct DodgeChallenger;
+#[derive(Debug, Component, PartialEq, Hash, Eq)]
+pub struct DodgeChallenger;
 
 fn spawn_dodge_challenger(mut commands: Commands, scene_assets: Res<SceneAssets>) {
     commands.spawn((
@@ -42,6 +44,7 @@ fn spawn_dodge_challenger(mut commands: Commands, scene_assets: Res<SceneAssets>
         },
         DodgeChallenger,
         ThirdPersonCameraTarget,
+        Collider::new(DODGE_CHALLENDER_RADIUS)
     ));
 }
 

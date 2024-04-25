@@ -17,6 +17,7 @@ use schedule::SchedulePlugin;
 use bevy_third_person_camera::ThirdPersonCameraPlugin;
 use road::RoadPlugin;
 use coin::CoinPlugin;
+use collision_detection::CollisionPlugin;
 
 fn main() {
     App::new()
@@ -30,5 +31,6 @@ fn main() {
         .add_plugins(AssetsLoaderPlugin)
         .add_plugins(DodgeChallengerPlugin)
         .add_plugins(CoinPlugin)
+        .add_plugins(CollisionPlugin)
         .run();
 }

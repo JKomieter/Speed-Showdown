@@ -1,10 +1,11 @@
 use bevy::prelude::*;
-use crate::assets_loader::SceneAssets;
+use crate::{assets_loader::SceneAssets, collision_detection::Collider};
 use rand::{thread_rng, Rng};
 
 pub struct CoinPlugin;
 
 const COIN_TRANSLATION: Vec3 = Vec3::new(0.0, 0.0, 5.0);
+const COIN_RADIUS: f32 = 2.5;
 
 impl Plugin for CoinPlugin {
     fn build(&self, app: &mut App) {
@@ -28,6 +29,7 @@ fn spawn_coins(mut commands: Commands, scene_assets: Res<SceneAssets>) {
                 ..default()
             },
             Coin(i),
+            Collider::new(COIN_RADIUS)
         ));
     }
 }
